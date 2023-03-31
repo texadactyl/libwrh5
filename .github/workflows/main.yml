@@ -1,0 +1,29 @@
+name: Regression Testing
+
+on: [push, pull_request]
+
+jobs:
+  one_job:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt update
+        cat dependencies.txt | sudo xargs -n 1 apt install -y
+
+    - name: Make Everything
+      run: |
+        make
+        
+    - name: Run tests & h5dump
+      run: |
+        bash run.sh
+        
+    - name: Cleanup
+      run: |
+        make clean
