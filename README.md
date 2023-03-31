@@ -2,7 +2,7 @@
 
 #### OVERVIEW
 
-This git project constitutes a Filterbank HDF5 file writing utility.  The library has been successfully built and tested on Raspberry Pi OS and Ubuntu.  It should run on other POSIX OSes and MacOS.  No GPUs are required.
+This git project constitutes a Filterbank HDF5 file writing library with accompanying test programs that also serve as examples.  The library has been successfully built and tested on Raspberry Pi OS and Ubuntu.  It should run on other POSIX OSes and MacOS.  No GPUs are required.
 
 #### LICENSING
 
