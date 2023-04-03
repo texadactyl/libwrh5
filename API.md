@@ -10,7 +10,15 @@ Roughly,
 
 ### FUNCTIONS
 
-All functions return either 0 (success) or 1 (failure).  In the case of a failure, error logging will appear with supporting detail.  Note that logging, in general, is minimal unless the debug-flag is set to 1.
+All functions return either 0 (success) or 1 (failure).  In the case of a failure, error logging will appear with supporting detail.
+
+The context, header, user-chunking, and user-caching structures are defined in file src/wrh5_defs.h.
+
+The output-path (char *) is an operating system absolute or relative path for specifying where to store the output HDF5 file.
+
+The debug-flag (int) has 2 values:
+* 0 : The libwrh5 functions will perform no logging unless a warning or error condition should arise.
+* 1 : Many informational details that are useful for debugging will be logged.
 
 #### wrh5_open(context, header(metadata), user-chunking or NULL, user-caching or NULL, output-path, debug-flag)
 
