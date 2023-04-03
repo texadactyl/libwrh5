@@ -170,7 +170,12 @@ void wrh5_write_metadata(hid_t dataset_id, wrh5_hdr_t *p_md, int debugging) {
     wrh5_set_dataset_int_attr(dataset_id, "telescope_id", &(p_md->telescope_id), debugging);
     wrh5_set_dataset_int_attr(dataset_id, "data_type", &(p_md->data_type), debugging);
     wrh5_set_dataset_int_attr(dataset_id, "nchans", &(p_md->nchans), debugging);
-    wrh5_set_dataset_int_attr(dataset_id, "nfpc", &(p_md->nfpc), debugging);
+    if(p_md->nfpc > 0)
+        wrh5_set_dataset_int_attr(dataset_id, "nfpc", &(p_md->nfpc), debugging);
+    else {
+        if(debugging)
+            wrh5_info("wrh5_write_metadata: nfpc = %d and will not be written to output header\n", p_md->nfpc);
+    }
     wrh5_set_dataset_int_attr(dataset_id, "nbeams", &(p_md->nbeams), debugging);
     wrh5_set_dataset_int_attr(dataset_id, "ibeam", &(p_md->ibeam), debugging);
     wrh5_set_dataset_int_attr(dataset_id, "nbits", &(p_md->nbits), debugging);

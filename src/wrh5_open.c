@@ -59,8 +59,8 @@ int wrh5_open(wrh5_context_t * p_wrh5_ctx, wrh5_hdr_t * p_wrh5_hdr,
         wrh5_error(__FILE__, __LINE__, msgstr);
         return 1;
     }
-    if(p_wrh5_hdr->nfpc < 1) {
-        sprintf(msgstr, "wrh5_open: nfpc must be > 0 but I saw %d", p_wrh5_hdr->nfpc);
+    if(p_wrh5_hdr->nfpc < -1) {
+        sprintf(msgstr, "wrh5_open: nfpc must be > -1 but I saw %d", p_wrh5_hdr->nfpc);
         wrh5_error(__FILE__, __LINE__, msgstr);
         return 1;
     }
@@ -69,10 +69,12 @@ int wrh5_open(wrh5_context_t * p_wrh5_ctx, wrh5_hdr_t * p_wrh5_hdr,
         wrh5_error(__FILE__, __LINE__, msgstr);
         return 1;
     }
-    if(p_wrh5_hdr->nchans % p_wrh5_hdr->nfpc != 0) {
-        sprintf(msgstr, "wrh5_open: nchans must be divisible by nfpc but I saw %d / %d", p_wrh5_hdr->nchans, p_wrh5_hdr->nfpc);
-        wrh5_error(__FILE__, __LINE__, msgstr);
-        return 1;
+    if(p_wrh5_hdr->nfpc > 0) {
+        if(p_wrh5_hdr->nchans % p_wrh5_hdr->nfpc != 0) {
+            sprintf(msgstr, "wrh5_open: nchans must be divisible by nfpc but I saw %d / %d", p_wrh5_hdr->nchans, p_wrh5_hdr->nfpc);
+            wrh5_error(__FILE__, __LINE__, msgstr);
+            return 1;
+        }
     }
         
     /*

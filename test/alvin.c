@@ -3,6 +3,7 @@
  * -------                                                                     *
  * Sample wrh5 application.                                                    *
  * User-specified caching and chunking parameters.                             *
+ * nfpc = 0.                                                                   *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
@@ -15,7 +16,6 @@
 
 #define NBITS           32
 #define NCHANS          1048576
-#define NFPC            1048576
 #define NIFS            1
 #define NTINTS          16
 #define NSPECTRA_PER_DUMP 1
@@ -34,7 +34,7 @@ void make_voyager_1_metadata(wrh5_hdr_t * p_wrh5_hdr) {
     p_wrh5_hdr->machine_id = 42;
     p_wrh5_hdr->nbeams = 1;
     p_wrh5_hdr->nchans = NCHANS;            // # of fine channels
-    p_wrh5_hdr->nfpc = NFPC;                // # of fine channels per coarse channel
+    p_wrh5_hdr->nfpc = 0;                   // unknown # of fine channels per coarse channel
     p_wrh5_hdr->nifs = NIFS;                // # of feeds (E.g. polarisations)
     p_wrh5_hdr->nbits = 32;                 // 4 bytes i.e. float32
     p_wrh5_hdr->src_raj = 171003.984;       // 17:12:40.481
