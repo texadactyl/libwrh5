@@ -107,6 +107,7 @@ typedef struct {
   // the name of the original data file
   char rawdatafile[81];
   // Number of fine channels per coarse channel
+  // If unknown, set nfpc=0.  This will cause the output header to omit this field.
   int nfpc;
   
 } wrh5_hdr_t;
