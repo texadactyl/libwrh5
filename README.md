@@ -22,7 +22,11 @@ I'll assume that you already have various GNU development tools.  See ```depende
 
 Subfolders:
 
-* src - C-language source code for the library and a Makefile
+* src
+- C-language source code (*.c)
+- Makefile
+- wrh5_defs.h : function and parameter definitions
+- wrh5_version.h : software version
 * lib - Upon completion of the ```make``` utility, this folder holds the shared object library file.
 * test - 2 simple test program, ```simon``` (default chunking and caching) and ```alvin``` (user-specified chunking and caching). 
 * test_data - test HDF5 data.

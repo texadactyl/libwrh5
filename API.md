@@ -2,7 +2,7 @@
 
 ### OVERVIEW
 
-Roughly, 
+The following are the high-level Filterbank HDF5 writing functions: 
 
 * wrh5_open - Initialize writing to a new HDF5 file or one to be replaced. Optional user-specified chunking and caching parameters may be provided.
 * wrh5_write - Present a buffer to be written.

@@ -7,8 +7,6 @@
 #ifndef wrh5_DEFS_H
 #define wrh5_DEFS_H
 
-#define VERSION_WRH5 "1.0"
-
 /*
  * O/S library definitions
  */
@@ -33,6 +31,11 @@
  * HDF5 library ID of the Bitshuffle filter.
  */
 #define FILTER_ID_BITSHUFFLE 32008
+
+/*
+ * Global definitions
+ */
+#include "wrh5_version.h"
 
 /*
  * Global definitions
