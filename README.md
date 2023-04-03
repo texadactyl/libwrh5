@@ -23,12 +23,14 @@ I'll assume that you already have various GNU development tools.  See ```depende
 Subfolders:
 
 * src
-- C-language source code (*.c)
-- Makefile
-- wrh5_defs.h : function and parameter definitions
-- wrh5_version.h : software version
+    - C-language source code (*.c)
+    - Makefile
+    - wrh5_defs.h : function and parameter definitions
+    - wrh5_version.h : software version
 * lib - Upon completion of the ```make``` utility, this folder holds the shared object library file.
-* test - 2 simple test program, ```simon``` (default chunking and caching) and ```alvin``` (user-specified chunking and caching). 
+* test 
+    - simon : default chunking and caching, user-defined nfpc value.
+    - alvin : user-specified chunking and caching, no nfpc value provided (0). 
 * test_data - test HDF5 data.
 
 See ```API.md``` for the API.
