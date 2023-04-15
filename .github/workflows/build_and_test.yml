@@ -22,7 +22,7 @@ jobs:
         
     - name: Run tests & h5dump
       run: |
-        bash run.sh
+        make try
         
     - name: Cleanup
       run: |
