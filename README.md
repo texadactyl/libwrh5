@@ -43,7 +43,9 @@ In the highest-level directory,
 
 #### Installation and Uninstallation
 
-By default, the target installation directory root is /usr/local.  This is indicated by the absence of a PREFIX environment variable at the time of the ```make install``` or ```make uninstall``` execution. If one wishes to use a different target installation directory root, specify ```export PREFIX=/your/chosen/root``` prior to running ```sudo -E make install``` or ```sudo -E make uninstall```.  Note that when using the PREFIX environment variable, it is important that the ```sudo``` command receive the ```-E``` parameter in order to preserve the value of PREFIX.
+By default, the target installation directory root is /usr/local.  This is indicated by the absence of a PREFIX environment variable at the time of the ```make install``` or ```make uninstall``` execution. 
+
+If one wishes to use a different target installation directory root, specify ```export PREFIX=/your/chosen/root``` prior to running ```sudo -E make install``` or ```sudo -E make uninstall```.  Note that when using the PREFIX environment variable, it is important that the ```sudo``` command receive the ```-E``` parameter in order to preserve the value of PREFIX.
 
 During installation, files are copied as follows:
 * Header files (*.h) --> ```include``` subdirectory
