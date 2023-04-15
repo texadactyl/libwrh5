@@ -39,13 +39,13 @@ all:
 install:
 	@echo PREFIX=$(PREFIX)
 	mkdir -p $(INCDIR)
-	cp -p $(H_LIBWRH5) $(INCDIR)
+	cp -p ./src/*.h $(INCDIR)
 	mkdir -p $(LIBDIR)
 	cp -p $(SO_LIBWRH5) $(LIBDIR)
 
 # System uninstallation - super user access
 uninstall:
-	rm $(INCDIR)/wrh5_defs.h
+	rm $(INCDIR)/wrh5*.h
 	rm $(LIBDIR)/libwrh5.so
 
 # Get rid of all made artifacts
