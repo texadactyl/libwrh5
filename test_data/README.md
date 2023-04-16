@@ -1,1 +1,1 @@
-This is where the HDF5 files are stored.
+This is where test data is stored.
