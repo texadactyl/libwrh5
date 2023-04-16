@@ -22,8 +22,8 @@ export CFLAGS = -c -fPIC -I $(INC_DIR_LIBHDF5)
 
 # Parameters for install/uninstall
 PREFIX ?= /usr/local
-INCDIR=$(PREFIX)/include
-LIBDIR=$(PREFIX)/lib
+INCDIR = $(PREFIX)/include
+LIBDIR = $(PREFIX)/lib
 
 # Parameters for try
 export LD_LIBRARY_PATH = ${shell pwd}/lib
@@ -48,7 +48,7 @@ uninstall:
 	rm $(INCDIR)/wrh5*.h
 	rm $(LIBDIR)/libwrh5.so
 
-# Get rid of all made artifacts
+# Get rid of make all & try artifacts
 clean:
 	cd src && $(MAKE) -f build.mk clean
 	cd test && $(MAKE) -f build.mk clean
