@@ -1,15 +1,14 @@
+"""
+Scrape a SIGPROC Filterbank file (.fil), producing:
+    * header file (text)
+    * data matrix file (binary)
+"""
+
 import os
 import struct
-import numpy as np
-from astropy import units as u
-from astropy.coordinates import Angle
-from blimpy import Waterfall
 from argparse import ArgumentParser
-
-
-INFILE_PATH = "testdata/voya.fil"
-OUTHDR_PATH = "testdata/voya_header.txt"
-OUTDATA_PATH = "testdata/voya_indata.bin"
+import numpy as np
+from blimpy import Waterfall
 
 
 header_keyword_types = {
@@ -40,11 +39,13 @@ header_keyword_types = {
 
 
 def fil_double_to_angle(angle):
-    """ Reads a little-endian double in ddmmss.s (or hhmmss.s) format and then
+    """ 
+    Reads a little-endian double in ddmmss.s (or hhmmss.s) format and then
     converts to Float degrees (or hours).  This is primarily used to read
-    src_raj and src_dej header values. """
+    src_raj and src_dej header values. 
+    """
 
-    negative = (angle < 0.0)
+    negative = angle < 0.0
     angle = np.abs(angle)
 
     dd = np.floor((angle / 10000))
@@ -60,6 +61,21 @@ def fil_double_to_angle(angle):
 
 
 def read_next_header_element(fh):
+    """
+    Get the next header element.
+
+    Parameters
+    ----------
+    fh : file handle
+        Used to read the file.
+
+    Returns
+    -------
+    keyword : string
+        Name of the header field.
+    value : multiple variable types
+        Value associated with the header field.
+    """
 
     n_bytes = np.frombuffer(fh.read(4), dtype='uint32')[0]
 
@@ -72,19 +88,32 @@ def read_next_header_element(fh):
         return keyword, 0
     dtype = header_keyword_types[keyword]
     if dtype == '<l':
-        val = struct.unpack(dtype, fh.read(4))[0]
+        value = struct.unpack(dtype, fh.read(4))[0]
     if dtype == 'str':
         str_len = np.frombuffer(fh.read(4), dtype='uint32')[0]
-        val = fh.read(str_len).decode('ascii')
+        value = fh.read(str_len).decode('ascii')
     if dtype == '<d':
-        val = struct.unpack(dtype, fh.read(8))[0]
+        value = struct.unpack(dtype, fh.read(8))[0]
     if dtype == 'angle':
-        val = fil_double_to_angle(struct.unpack('<d', fh.read(8))[0])
-    return keyword, val
+        value = fil_double_to_angle(struct.unpack('<d', fh.read(8))[0])
+    return keyword, value
 
 
 def read_header(filename):
+    """
+    Read the entire .fil file header.
 
+    Parameters
+    ----------
+    filename : string
+        O/S path of file.
+
+    Returns
+    -------
+    hdr : Python dict object
+        Populated header.
+
+    """
     hdr = {}
 
     with open(filename, 'rb') as fh:
@@ -100,22 +129,49 @@ def read_header(filename):
 
 
 def scrape_header(infile_path, outhdr_path):
+    """
+    Scrape the header.
 
+    Parameters
+    ----------
+    infile_path : string
+        O/S path of input .fil file.
+    outhdr_path : string
+        O/S path of output header file as an O/S text file.
+
+    Returns
+    -------
+    None.
+
+    """
     hdr = read_header(infile_path)
-    with open(outhdr_path, "w") as outh:
+    with open(outhdr_path, "w", encoding="utf-8") as outh:
         for (key, value) in hdr.items():
-            #print("\t{}     {}".format(key, value))
-            outh.write("{}     {}\n".format(key, value))
+            outh.write(f"{key}     {value}\n")
 
 
 def scrape_data(infile_path, outdata_path):
+    """
+    Scrape the data matrix.
+
+    Parameters
+    ----------
+    infile_path : string
+        O/S path of input .fil file.
+    outhdr_path : string
+        O/S path of output data file as a binary file.
+
+    Returns
+    -------
+    None.
+
+    """
     wf = Waterfall(infile_path)
     with open(outdata_path, "wb") as outh:
         outh.write(wf.data)
 
 
 def main(args=None):
-    # Create a parser to get command-line input/arguments
     parser = ArgumentParser(description="Scrape a Filterbank file, producing a header file and a data file.")
 
     parser.add_argument("--in_fil", required=True, type=str,
@@ -133,7 +189,7 @@ def main(args=None):
     abs_in_fil = os.path.abspath(args.in_fil)
     abs_out_hdr = os.path.abspath(args.out_hdr)
     abs_out_data = os.path.abspath(args.out_data)
-        
+
     print("Writing header file: " + abs_out_hdr)
     scrape_header(abs_in_fil, abs_out_hdr)
     print("Header done")

@@ -5,7 +5,7 @@ if [ $nargs -ne 1 ]; then
 	echo \*\*\* Number of arguments must be 1; observed $nargs \!\!\!
 	exit 1
 fi
-if [ ${LINK_LIBHDF5}xx == xx ]; then
+if [ "${LINK_LIBHDF5}xx" == "xx" ]; then
 	echo \*\*\* Must be run from the root directory Makefile \!\!\!
 	exit 1
 fi
@@ -23,7 +23,6 @@ fi
 
 python3 scrape.py --in_fil $FILFILE --out_hdr $HDR_FILE --out_data $DATA_FILE
 
-set -x
 ./theodore  $HDR_FILE  $DATA_FILE  $H5_FILE  0
 
 watutil -i $H5_FILE

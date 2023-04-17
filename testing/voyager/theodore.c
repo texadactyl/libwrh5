@@ -43,7 +43,6 @@ int main(int argc, const char **argv) {
     /*
      * Collect command line arguments.
      */
-    printf("DEBUG theodore: begin\n");
     strncpy(path_in_hdr, argv[1], sizeof path_in_hdr);
     strncpy(path_in_data, argv[2], sizeof path_in_data);
     strncpy(path_out_h5, argv[3], sizeof path_out_h5);
