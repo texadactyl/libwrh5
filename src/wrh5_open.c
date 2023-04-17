@@ -10,9 +10,12 @@
 /***
 	Open-file entry point.
 ***/
-int wrh5_open(wrh5_context_t * p_wrh5_ctx, wrh5_hdr_t * p_wrh5_hdr,
-              user_chunking_t * p_user_chunking, user_caching_t * p_user_caching,
-              char * output_path, int debugging) {
+int wrh5_open(wrh5_context_t * p_wrh5_ctx,
+              wrh5_hdr_t * p_wrh5_hdr,
+              char * output_path,
+              user_chunking_t * p_user_chunking,
+              user_caching_t * p_user_caching,
+              int debugging) {
     hid_t       dcpl;               // Chunking handle - needed until dataset handle is produced
     hsize_t     max_dims[NDIMS];    // Maximum dataset allocation dimensions
     herr_t      status;             // Status from HDF5 function call
@@ -59,13 +62,8 @@ int wrh5_open(wrh5_context_t * p_wrh5_ctx, wrh5_hdr_t * p_wrh5_hdr,
         wrh5_error(__FILE__, __LINE__, msgstr);
         return 1;
     }
-    if(p_wrh5_hdr->nfpc < -1) {
+    if(p_wrh5_hdr->nfpc < 0) {
         sprintf(msgstr, "wrh5_open: nfpc must be > -1 but I saw %d", p_wrh5_hdr->nfpc);
-        wrh5_error(__FILE__, __LINE__, msgstr);
-        return 1;
-    }
-    if(p_wrh5_hdr->nchans < 1) {
-        sprintf(msgstr, "wrh5_open: nchans must be > 0 but I saw %d", p_wrh5_hdr->nchans);
         wrh5_error(__FILE__, __LINE__, msgstr);
         return 1;
     }

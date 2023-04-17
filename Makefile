@@ -7,7 +7,7 @@ export LIB_DIR_LIBWRH5 = $(CURDIR)/lib
 export SO_FILE_LIBWRH5 = libwrh5.so
 export LINK_LIBWRH5 = -L ${LIB_DIR_LIBWRH5} -l :$(SO_FILE_LIBWRH5)
 
-# libhdf artifacts
+# libhdf5 artifacts
 export INC_DIR_LIBHDF5 = /usr/include/hdf5/serial/ 
 export SO_DIR_LIBHDF5 = /usr/lib/x86_64-linux-gnu/hdf5/serial/
 SO_LIBHDF5 := :libhdf5.so
@@ -34,10 +34,11 @@ export LD_LIBRARY_PATH = ${shell pwd}/lib
 
 # --- Actions ---
 
-# Compile and link edit
-all:
-	cd src && $(MAKE) -f build.mk
-	cd $(UNIT_TESTS) && $(MAKE) -f build.mk
+# Compile and link edit (default action)
+build:
+	cd src && $(MAKE) -f src.mk
+	cd $(UNIT_TESTS) && $(MAKE) -f unit_tests.mk
+	cd $(VOYAGER) && $(MAKE) -f voyager.mk
 
 # System installation - super user access
 install:
@@ -54,18 +55,19 @@ uninstall:
 
 # Get rid of make all & try artifacts
 clean:
-	cd src && $(MAKE) -f build.mk clean
-	cd $(UNIT_TESTS) && $(MAKE) -f build.mk clean
-	rm -f lib/*.so
-	rm -f ./test_data/*.h5
+	cd src && $(MAKE) -f src.mk clean
+	cd $(UNIT_TESTS) && $(MAKE) -f unit_tests.mk clean
+	cd $(VOYAGER) && $(MAKE) -f voyager.mk clean
+	rm -rf $(LIB_DIR_LIBWRH5)
+	rm -rf $(TEST_DATA)
 
-# Try the basic unit test programs
+# Try the unit test programs
 try:
-	cd $(UNIT_TESTS)
-	# Run simon and dump the output header:
-	$(UNIT_TESTS)/simon $(TEST_DATA)/simon.h5
-	h5dump -A $(TEST_DATA)/simon.h5
-	# Run alvin and dump the output header:
-	$(UNIT_TESTS)/alvin $(TEST_DATA)/alvin.h5
-	h5dump -A $(TEST_DATA)/alvin.h5
+	mkdir -p $(TEST_DATA)
+	cd $(UNIT_TESTS) && pwd && bash run_unit_tests.sh $(TEST_DATA)
+
+# Try the Voyager 1 file
+voya:
+	mkdir -p $(TEST_DATA)
+	cd $(VOYAGER) && pwd && bash run_voya.sh $(TEST_DATA)
 

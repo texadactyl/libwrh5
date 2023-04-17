@@ -13,7 +13,8 @@
 /***
 	Main entry point.
 ***/
-int wrh5_close(wrh5_context_t * p_wrh5_ctx, int debugging) {
+int wrh5_close(wrh5_context_t * p_wrh5_ctx, 
+               int debugging) {
     herr_t      status;         // Status from HDF5 function call
     hsize_t     sz_store;       // Storage size
     double      MiBstore;       // sz_store converted to MiB

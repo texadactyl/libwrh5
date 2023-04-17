@@ -136,13 +136,21 @@ typedef struct {
 } user_caching_t;
 
 /*
- * wrh5 API functions
+ * libwrh5 caller API functions
  */
-int     wrh5_open(wrh5_context_t * p_wrh5_ctx, wrh5_hdr_t * p_wrh5_hdr,
-                  user_chunking_t * p_user_chunking, user_caching_t * p_user_caching,
-                  char * output_path, int flag_debug);
-int     wrh5_write(wrh5_context_t * p_wrh5_ctx, wrh5_hdr_t * p_wrh5_hdr, void * buffer, size_t bufsize, int flag_debug);
-int     wrh5_close(wrh5_context_t * p_wrh5_ctx, int flag_debug);
+int     wrh5_open(wrh5_context_t * p_wrh5_ctx,
+			      wrh5_hdr_t * p_wrh5_hdr, 
+			      char * output_path, 
+                  user_chunking_t * p_user_chunking, 
+                  user_caching_t * p_user_caching, 
+                  int flag_debug);
+int     wrh5_write(wrh5_context_t * p_wrh5_ctx,
+                   wrh5_hdr_t * p_wrh5_hdr, 
+                   void * buffer, 
+                   size_t bufsize, 
+                   int flag_debug);
+int     wrh5_close(wrh5_context_t * p_wrh5_ctx, 
+                   int flag_debug);
 
 /*
  * wrh5_util.c functions

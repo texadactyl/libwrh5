@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
      */
     printf("alvin: Data and header initialisation completed.  Begin data writes .....\n");
     time(&time1);
-    if(wrh5_open(&wrh5_ctx, &wrh5_hdr, &chunking, &caching, path_h5, verbose) != 0) {
+    if(wrh5_open(&wrh5_ctx, &wrh5_hdr, path_h5, &chunking, &caching, verbose) != 0) {
         fatal_error(__LINE__, "wrh5_open failed");
         exit(86);
     }

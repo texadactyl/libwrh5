@@ -16,7 +16,10 @@
 /***
 	Main entry point.
 ***/
-int wrh5_write(wrh5_context_t * p_wrh5_ctx, wrh5_hdr_t * p_wrh5_hdr, void * p_buffer, size_t bufsize, int debugging) {
+int wrh5_write(wrh5_context_t * p_wrh5_ctx, 
+               wrh5_hdr_t * p_wrh5_hdr, void * p_buffer, 
+               size_t bufsize, 
+               int debugging) {
     herr_t      status;          // Status from HDF5 function call
     size_t      ntints;          // Number of time integrations in the current dump
     hid_t       filespace_id;    // Identifier for a copy of the dataspace 
