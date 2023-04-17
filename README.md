@@ -26,18 +26,34 @@ I'll assume that you already have various GNU development tools.  See ```depende
 
 #### Getting Started
 
-Subfolders:
+Makefile: drives all ```make``` functions:
+* build
+    - Compile all library source and testing *.c files.
+    - Create the library.
+* try - Try the unit tests, alvin and simon.
+* voya - Try the Voyager 1 data (theodore)
+* install - system level installation of library file and header files (super-user access required).
+* uninstall - undo system level installation (super-user access required).
+* clean - remove all built objects, lib directory, and test_data directory.
 
+Permanent subfolders:
 * src
     - C-language source code (*.c)
-    - Makefile
     - wrh5_defs.h : function and parameter definitions
     - wrh5_version.h : software version
-* lib - Upon completion of the ```make``` utility, this folder holds the shared object library file.
-* test 
-    - simon : default chunking and caching, user-defined nfpc value.
-    - alvin : user-specified chunking and caching, no nfpc value provided (0). 
-* test_data - test HDF5 data.
+    - src.mk : ```make``` file for this subdirectory
+* testing/unit_tests 
+    - simon.c : default chunking and caching, user-defined nfpc value.
+    - alvin.c : user-specified chunking and caching, no nfpc value provided (0). 
+    - unit_tests.mk : ```make``` file for this subdirectory
+* testing/voyager
+    - scrape.py : Read a Voyager 1 SIGPROC Filterbank file (.fil) and produce [a} header file and [b] binary image data matrix file.
+    - theodore.c : Read header file and data file; output a Filterbank HDF5 file (.h5).
+    - voyager.mk : ```make``` file for this subdirectory
+
+Dynamically-created subfolders:
+* lib - libwrh5.so
+* test_data - testing HDF5 data and supporting data artifacts.
 
 See ```API.md``` for the API.
 
