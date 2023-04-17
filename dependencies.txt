@@ -2,3 +2,4 @@ libhdf5-dev
 hdf5-tools
 gcc
 make
+python3

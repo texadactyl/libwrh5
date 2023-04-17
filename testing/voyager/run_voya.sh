@@ -24,6 +24,6 @@ fi
 python3 scrape.py --in_fil $FILFILE --out_hdr $HDR_FILE --out_data $DATA_FILE
 
 set -x
-theodore  $HDR_FILE  $DATA_FILE  $H5_FILE  0
+./theodore  $HDR_FILE  $DATA_FILE  $H5_FILE  0
 
 watutil -i $H5_FILE

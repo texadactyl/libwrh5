@@ -15,6 +15,7 @@ jobs:
       run: |
         sudo apt update
         cat dependencies.txt | sudo xargs -n 1 apt install -y
+        python3 -m pip install blimpy
 
     - name: Make Everything
       run: |
@@ -23,6 +24,10 @@ jobs:
     - name: Run tests & h5dump
       run: |
         make try
+        
+    - name: Run tests & h5dump
+      run: |
+        make voya
         
     - name: Cleanup
       run: |
