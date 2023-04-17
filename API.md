@@ -20,16 +20,20 @@ The debug-flag (int) has 2 values:
 * 0 : The libwrh5 functions will perform no logging unless a warning or error condition should arise.
 * 1 : Many informational details that are useful for debugging will be logged.
 
-#### wrh5_open(context, header(metadata), user-chunking or NULL, user-caching or NULL, output-path, debug-flag)
+#### NFPC - Number of Fine Channels per Coarse Channel
+
+When populating the header structure, there is one optional field: nfpc.  If the value is unknown, set it to 0.  This will cause the library to omit the nfpc from the output HDF5 header.
+
+#### wrh5_open(context, header, output-path, user-chunking or NULL, user-caching or NULL, debug-flag)
 
 * context : address of a struct defined in wrh5_defs.h that will be initialized by the wrh5_open process.
 * header : address of a struct defined in wrh5_defs.h that is populated prior to the call to wrh5_open.
+* output-path : O/S path to write the HDF5 file.  Note that any preexisting file is replaced.
 * user-chunking : If not NULL, this is the address of a struct defined in wrh5_defs.h which holds the 3-dimensional chunking parameters supplied by the caller.  If not provided (NULL), the default is to provide blimpy-style chunking.
 * user-caching : If not NULL, this is the address of a struct defined in wrh5_defs.h which holds the caching parameters supplied by the caller.  If not provided (NULL), the libhdf5 library will provide default caching. See https://portal.hdfgroup.org/display/HDF5/H5P_SET_CACHE for a description of libhdf5 caching and the individual caching fields.
-* output-path : O/S path to write the HDF5 file.  Note that any preexisting file is replaced.
 * debug-flag : If set to nonzero, detailed logging is provided.
 
-#### wrh5_write(context, header(metadata), buffer-address, buffer-size, debug-flag)
+#### wrh5_write(context, header, buffer-address, buffer-size, debug-flag)
 
 * context : address of the current context struct that was previously initialized by the wrh5_open process.  Note that the context is updated by this function during the processing of the caller's request.
 * header : address of the header that was passed in the call to wrh5_open (unchanged).
