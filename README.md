@@ -44,8 +44,9 @@ See ```API.md``` for the API.
 #### Build Library and Test
 
 In the highest-level directory,
-* ```make```
-* ```make try```
+* Build library and test tools: ```make```
+* Try the unit test tools: ```make try```
+* Try the Voyager 1 data: ```make voya``` (requires Python and package blimpy)
 
 #### Installation and Uninstallation
 
