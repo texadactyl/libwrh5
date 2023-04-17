@@ -25,7 +25,7 @@ jobs:
       run: |
         make try
         
-    - name: Run tests & h5dump
+    - name: Run Voyager 1 tests
       run: |
         make voya
         
