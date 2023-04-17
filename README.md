@@ -2,12 +2,13 @@
 
 #### Overview
 
-This git project constitutes a Filterbank HDF5 file writing library with accompanying test programs that also serve as examples.  The library has been successfully built and tested on Raspberry Pi OS and Ubuntu.  It should run on other POSIX OSes and MacOS.  No GPUs are required.
+This git project constitutes a Filterbank HDF5 file writing library with accompanying test programs that also serve as examples.  The library has been successfully built and tested on Raspberry Pi OS and Ubuntu.  It should run on other POSIX OSes and, with some more work, MacOS or Windows.  No GPUs are required.
 
 #### Brief History
 
 * Started as the fbh5 subset of rawspec.
 * Converted to a generic library without Filterbank for a private non-github application.
+* User tuning of chunking and caching added.
 * Reflavoured with Filterbank for use with telescope applications that can stream a Filterbank header and data to this library.
 
 #### Licensing
