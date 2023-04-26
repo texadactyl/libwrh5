@@ -22,7 +22,7 @@ jobs:
 
     - name: Make Everything
       run: |
-        make
+        make build
         
     - name: Run tests & h5dump
       run: |
