@@ -34,6 +34,22 @@ export LD_LIBRARY_PATH = ${shell pwd}/lib
 
 # --- Actions ---
 
+# Help (default action)
+help:
+	@echo
+	@echo 'make build : Create lib/libwr5.so. Compile the unit tests (simon, alvin) and the Voyager 1 test (theodore).'
+	@@echo 'make install : Copy lib/libwr5.so to $(PREFIX)/lib and src/*.h to $(PREFIX)/include.'
+	@echo 'make uninstall : Reverse the effects of make install.'
+	@echo 'make clean : Remove src/*.o, the lib directory, and the test_data directory.'
+	@echo 'make try: Run unit tests simon and alvin.'
+	@echo '          * Simon creates a Filterbank HDF5 file using the default caching and chunking parameters.'
+	@echo '          * Alvin creates a Filterbank HDF5 file with specified caching and chunking parameters.'
+	@echo 'make voya: Run theodore which uses Voyager 1 Filterbank file (.fil) data.'
+	@echo '           * Download the Voyager 1 .fil file.'
+	@echo '           * Scrape the header fields and the binary data into 2 separate files.'
+	@echo '           * Theodore reads both scrapings and creates the corresponding Filterbank HDF5 file.'
+	@echo
+
 # Compile and link edit (default action)
 build:
 	cd src && $(MAKE) -f src.mk
